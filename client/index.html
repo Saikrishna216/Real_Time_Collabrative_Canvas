@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Collaborative Canvas</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="app">
+    <!-- Toolbar -->
+    <div class="toolbar">
+      <div class="toolbar-section">
+        <h3>Tools</h3>
+        <div class="tool-group">
+          <button id="tool-brush" class="tool-btn active" title="Brush (B)">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 19l7-7 3 3-7 7-3-3z"/>
+              <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/>
+            </svg>
+          </button>
+          <button id="tool-eraser" class="tool-btn" title="Eraser (E)">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20 20H7L3 16l10-10 8 8-1 6z"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="toolbar-section">
+        <h3>Color</h3>
+        <div class="color-group">
+          <input type="color" id="color-picker" value="#000000" title="Color">
+          <div class="color-presets">
+            <button class="color-preset" data-color="#000000" style="background: #000000"></button>
+            <button class="color-preset" data-color="#FF0000" style="background: #FF0000"></button>
+            <button class="color-preset" data-color="#00FF00" style="background: #00FF00"></button>
+            <button class="color-preset" data-color="#0000FF" style="background: #0000FF"></button>
+            <button class="color-preset" data-color="#FFFF00" style="background: #FFFF00"></button>
+            <button class="color-preset" data-color="#FF00FF" style="background: #FF00FF"></button>
+            <button class="color-preset" data-color="#00FFFF" style="background: #00FFFF"></button>
+            <button class="color-preset" data-color="#FFFFFF" style="background: #FFFFFF; border: 1px solid #ccc"></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="toolbar-section">
+        <h3>Stroke Width: <span id="width-value">2</span>px</h3>
+        <input type="range" id="stroke-width" min="1" max="50" value="2" step="1">
+      </div>
+
+      <div class="toolbar-section">
+        <h3>Smoothing</h3>
+        <select id="smoothing-mode">
+          <option value="none">None</option>
+          <option value="quadratic" selected>Quadratic</option>
+          <option value="cubic">Cubic</option>
+        </select>
+      </div>
+
+      <div class="toolbar-section">
+        <h3>Actions</h3>
+        <div class="action-group">
+          <button id="undo-btn" title="Undo (Ctrl+Z)">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 7v6h6"/>
+              <path d="M21 17a9 9 0 00-9-9 9 9 0 00-6 2.3L3 13"/>
+            </svg>
+            Undo
+          </button>
+          <button id="redo-btn" title="Redo (Ctrl+Y)">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 7v6h-6"/>
+              <path d="M3 17a9 9 0 019-9 9 9 0 016 2.3l3 2.7"/>
+            </svg>
+            Redo
+          </button>
+          <button id="clear-btn" title="Clear Canvas">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="3 6 5 6 21 6"/>
+              <path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6"/>
+            </svg>
+            Clear
+          </button>
+        </div>
+      </div>
+
+      <div class="toolbar-section">
+        <h3>Persistence</h3>
+        <div class="action-group">
+          <button id="save-btn">💾 Save</button>
+          <button id="load-btn">📂 Load</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Canvas Container -->
+    <div class="canvas-container">
+      <canvas id="canvas"></canvas>
+      
+      <!-- Roster Panel -->
+      <div class="roster-panel" id="roster-panel" style="display: none;">
+        <h3>👥 Online Users</h3>
+        <div class="roster-list" id="roster-list"></div>
+      </div>
+
+      <div class="status-bar">
+        <div id="status-text">Ready</div>
+        <div id="fps-counter">FPS: --</div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="./main.ts"></script>
+</body>
+</html>
